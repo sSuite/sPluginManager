@@ -1,4 +1,4 @@
-package com.github.Smiley43210.sPluginManager;
+package tk.nekotech.sPluginManager;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -29,7 +29,12 @@ public class sPluginManager extends JavaPlugin {
 				PST(e);
 			}
 		}
-		startTimer
+		startTimer();
+	}
+
+	private void PST(IOException e) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public void onDisable() {

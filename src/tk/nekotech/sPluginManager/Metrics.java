@@ -1,4 +1,4 @@
-package com.github.Smiley43210.sPluginManager;
+package tk.nekotech.sPluginManager;
 /*
  * Copyright 2011 Tyler Blair. All rights reserved.
  *

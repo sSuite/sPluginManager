@@ -1,4 +1,14 @@
 name: sPluginManager
-author: Smiley43210
-main: com.github.Smiley4321.sPluginManager.sPluginManager
+author: [Smiley43210, FunnyJ2]
+main: tk.nekotech.sPluginManager
 version: 0.0.1
+commands:
+  spm:
+    description: Display help for sPluginManager.
+    usage: /<command> [args]
+  spluginmanager:
+    description: Display help for sPluginManager.
+    usage: /<command> [args]
+  splugman:
+    description: Display help for sPluginManager.
+    usage: /<command> [args]
