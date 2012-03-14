@@ -9,11 +9,9 @@ import org.bukkit.entity.Player;
 import ru.tehkode.permissions.PermissionManager;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
-public class onCmdPlayer {
+public class onCmdPlayer{
 
-	sPluginManager p;
-	PermissionManager permissions;
-	//Colors
+	// Colors
 	ChatColor aqua = ChatColor.AQUA;
 	ChatColor black = ChatColor.BLACK;
 	ChatColor blue = ChatColor.BLUE;
@@ -30,60 +28,55 @@ public class onCmdPlayer {
 	ChatColor red = ChatColor.RED;
 	ChatColor white = ChatColor.WHITE;
 	ChatColor yellow = ChatColor.YELLOW;
-	//End Colors
+	// End Colors
+	sPluginManager p;
+	PermissionManager permissions;
 
 	public onCmdPlayer(sPluginManager p){
 		this.p = p;
 	}
 
 	public boolean cmd(CommandSender i, Command j, String[] l){
-		if(PEXEnabled())
+		if (PEXEnabled())
 			permissions = PermissionsEx.getPermissionManager();
-		if(j.getName().equalsIgnoreCase("spluginmanager") || j.getName().equalsIgnoreCase("spm") || j.getName().equalsIgnoreCase("splugman")){
-			if(PEXEnabled()){
+		if (j.getName().equalsIgnoreCase("spluginmanager") || j.getName().equalsIgnoreCase("spm") || j.getName().equalsIgnoreCase("splugman"))
+			if (PEXEnabled()){
 				if (hasPerm(i, "spluginmanager.")){
-					i.sendMessage(ChatColor.RED+"You don't have permission!");
+					i.sendMessage(ChatColor.RED + "You don't have permission!");
 					return true;
 				}
-				if (l.length == 0) {
+				if (l.length == 0){
 					help(i);
 					return true;
 				}
-				if (l[0].equalsIgnoreCase("list")) {
-					//list
+				if (l[0].equalsIgnoreCase("list"))
+					// list
+					return true;
+				else{
+					i.sendMessage(ChatColor.RED + "Unknown command.");
+					help(i);
 					return true;
 				}
-				else {
-					i.sendMessage(ChatColor.RED+"Unknown command.");
+			}else if (i.isOp()){
+				if (l.length == 0){
+					help(i);
+					return true;
+				}
+				if (l[0].equalsIgnoreCase("list"))
+					// list
+					return true;
+				else{
+					i.sendMessage(ChatColor.RED + "Unknown command.");
 					help(i);
 					return true;
 				}
 			}
-			else {
-				if (i.isOp()) {
-					if (l.length == 0) {
-						help(i);
-						return true;
-					}
-					if (l[0].equalsIgnoreCase("list")) {
-						//list
-						return true;
-					}
-					else {
-						i.sendMessage(ChatColor.RED+"Unknown command.");
-						help(i);
-						return true;
-					}
-				}
-			}
-		}
 		return false;
 	}
 
 	public final boolean PEXEnabled(){
-		if(Bukkit.getServer().getPluginManager().isPluginEnabled("PermissionsEx")){
+		if (Bukkit.getServer().getPluginManager().isPluginEnabled("PermissionsEx"))
 			return true;
-		}
 		return false;
 	}
 
@@ -94,17 +87,16 @@ public class onCmdPlayer {
 	}
 
 	public final void help(CommandSender i){
-		i.sendMessage(darkred+"Aliases: /splugman, /spm");
-		i.sendMessage(gold+"Usage: /spluginmanager [list|disable [plugin] [-r]|enable|remembered]");
-		i.sendMessage(gold+"  /spluginmanager     "+green+"Displays this help message");
-		i.sendMessage(gold+"    list              "+green+"Lists installed plugins on server");
-		i.sendMessage(gold+"    disable [plugin]  "+green+"Disables specified plugin");
-		i.sendMessage(gold+"      -s              "+green+"Always disable plugin");
-		i.sendMessage(gold+"      +s              "+green+"Removes -s flag");
-		i.sendMessage(gold+"    enable [plugin]   "+green+"Enables specified plugin");
-		i.sendMessage(gold+"    remembered        "+green+"Lists plugins to always disable");
-		i.sendMessage(gold+"Example: /splugman disable myplugin -s");
-		i.sendMessage(gold+"Disables myplugin, even when the server restarts.");
+		i.sendMessage(darkred + "Aliases: /splugman, /spm");
+		i.sendMessage(gold + "Usage: /spluginmanager [list|disable [plugin] [-r]|enable|remembered]");
+		i.sendMessage(gold + "  /spluginmanager     " + green + "Displays this help message");
+		i.sendMessage(gold + "    list              " + green + "Lists installed plugins on server");
+		i.sendMessage(gold + "    disable [plugin]  " + green + "Disables specified plugin");
+		i.sendMessage(gold + "      -s              " + green + "Always disable plugin");
+		i.sendMessage(gold + "      +s              " + green + "Removes -s flag");
+		i.sendMessage(gold + "    enable [plugin]   " + green + "Enables specified plugin");
+		i.sendMessage(gold + "    remembered        " + green + "Lists plugins to always disable");
+		i.sendMessage(gold + "Example: /splugman disable myplugin -s");
+		i.sendMessage(gold + "Disables myplugin, even when the server restarts.");
 	}
-
 }
