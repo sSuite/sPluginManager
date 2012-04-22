@@ -1,7 +1,6 @@
 package tk.nekotech.sPluginManager;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,14 +8,19 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import tk.nekotech.sSuiteLib.ErrorHandling;
+import tk.nekotech.sSuiteLib.Logging;
+
 public class sPluginManager extends JavaPlugin{
 
 	int x = -2389;
 	private FileConfiguration cfg;
-	Logger log = getLogger();
+	private ErrorHandling err;
+	private Logging log;
 
 	public void onEnable(){
 		cfg = getConfig();
+		err = new ErrorHandling(this, cfg, "", "");
 		if (cfg.getBoolean("sendStats")){
 			log.info("This plugin will send usage stats to metrics.griefcraft.com");
 			log.info("every 10 minutes. Option to disable is in the config.");
@@ -24,14 +28,10 @@ public class sPluginManager extends JavaPlugin{
 				Metrics metrics = new Metrics();
 				metrics.beginMeasuringPlugin(this);
 			}catch (IOException e){
-				PST(e);
+				err.PST(e);
 			}
 		}
 		startTimer();
-	}
-
-	private void PST(IOException e){
-		// TODO Auto-generated method stub
 	}
 
 	public void onDisable(){
